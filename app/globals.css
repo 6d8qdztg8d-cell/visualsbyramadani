@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-anton);
+
+  --color-bg: #F5F5F3;
+  --color-ink: #0A0A0A;
+  --color-accent: #FF2200;
+  --color-muted: #8C8C8A;
+  --color-surface: #EBEBEA;
+  --color-border: #E0E0DE;
+  --color-dark: #111110;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
+  /* Entfernt blauen Tap-Highlight auf iOS */
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  zoom: 0.75;
+  /* Verhindert iOS-Schriftgrößen-Anpassung bei Orientierungswechsel */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F5F5F3;
+  color: #0A0A0A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Verhindert Bounce-Scroll über die Seite hinaus */
+  overscroll-behavior-y: none;
+  /* Flüssiges Momentum-Scrolling auf iOS */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Verhindert ungewolltes Text-Select bei Touch */
+h1, h2, h3 {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0A0A0A;
+}
+
+::selection {
+  background: #0A0A0A;
+  color: #F5F5F3;
 }
