@@ -93,7 +93,7 @@ export default function CarPorn() {
   )
 }
 
-function ScrollProgress({ sectionRef }: { sectionRef: React.RefObject<HTMLDivElement> }) {
+function ScrollProgress({ sectionRef }: { sectionRef: React.RefObject<HTMLDivElement | null> }) {
   const barRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
