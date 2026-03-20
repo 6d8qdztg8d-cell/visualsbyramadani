@@ -23,7 +23,7 @@ export default function CarPorn() {
       ([entry]) => {
         isVisible.current = entry.isIntersecting
       },
-      { threshold: 0.1 }
+      { threshold: 0.5 }
     )
     observer.observe(section)
 
