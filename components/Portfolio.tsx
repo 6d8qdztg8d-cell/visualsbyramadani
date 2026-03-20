@@ -64,7 +64,7 @@ export default function Portfolio() {
   const filtered = PHOTOS.filter((p) => active === 'all' || p.category === active)
 
   return (
-    <section id="portfolio" className="py-24 md:py-36 px-6 md:px-12 bg-[#F5F5F3]">
+    <section id="portfolio" className="py-8 md:py-36 px-6 md:px-12 bg-[#F5F5F3]">
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
