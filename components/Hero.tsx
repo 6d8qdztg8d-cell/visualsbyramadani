@@ -5,13 +5,14 @@ import { motion } from 'framer-motion'
 
 export default function Hero() {
   return (
-    <section className="relative w-full overflow-hidden" style={{ height: '100dvh' }}>
+    <section className="relative w-full overflow-hidden h-[55vw] md:h-screen">
       <Image
         src="/mercedes_190e_evo2.jpg"
         alt="Mercedes 190E Evolution II rolling shot — Visuals by Ramadani"
         fill
         priority
-        className="object-cover object-center"
+        className="object-cover"
+        style={{ objectPosition: '50% 45%' }}
         sizes="100vw"
       />
 
