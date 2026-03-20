@@ -28,11 +28,14 @@ export default function Hero() {
         }}
       />
 
-      {/* Content — bottom area */}
-      <div className="absolute inset-x-0 bottom-0 px-6 md:px-12 pb-12 md:pb-20" style={{ paddingBottom: 'max(3rem, calc(env(safe-area-inset-bottom) + 2rem))' }}>
-        {/* Category pills */}
+      {/* Content — mobile: compact single row | desktop: full stack */}
+      <div
+        className="absolute inset-x-0 bottom-0 px-5 md:px-12"
+        style={{ paddingBottom: 'max(0.9rem, calc(env(safe-area-inset-bottom) + 0.5rem))' }}
+      >
+        {/* Desktop-only: category pills */}
         <motion.div
-          className="flex flex-wrap gap-2 mb-6"
+          className="hidden md:flex flex-wrap gap-2 mb-6"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -47,9 +50,9 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* "Visuals by" label */}
+        {/* Desktop-only: "Visuals by" label */}
         <motion.p
-          className="text-white text-xs tracking-[0.3em] uppercase mb-1"
+          className="hidden md:block text-white text-xs tracking-[0.3em] uppercase mb-1"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -62,55 +65,51 @@ export default function Hero() {
           className="text-white leading-none tracking-tighter"
           style={{
             fontFamily: 'var(--font-anton)',
-            fontSize: 'clamp(3rem, 7vw, 7rem)',
+            fontSize: 'clamp(1.5rem, 5.5vw, 7rem)',
           }}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          RAMADANI
+          VISUALS BY RAMADANI
         </motion.h1>
 
-        {/* Bottom row: tagline + CTA */}
+        {/* CTAs row */}
         <motion.div
-          className="flex flex-col md:flex-row md:items-center justify-between gap-6 mt-6"
+          className="flex items-center gap-3 mt-2 md:mt-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.9 }}
+          transition={{ duration: 0.9, delay: 0.6 }}
         >
-          <p className="text-white text-sm leading-relaxed max-w-xs">
-            Sport & Automotive Fotografie
-            <br />
-            London — Weltweit verfügbar
+          <a
+            href="#portfolio"
+            className="bg-white text-[#0A0A0A] text-[9px] md:text-xs font-semibold tracking-[0.15em] px-3 py-1.5 md:px-6 md:py-3 rounded-full hover:bg-[#FF2200] hover:text-white transition-colors duration-300 whitespace-nowrap"
+          >
+            MEINE ARBEIT
+          </a>
+          <a
+            href="#buchung"
+            className="text-white/70 text-[9px] md:text-xs font-medium tracking-[0.15em] flex items-center gap-1.5 hover:text-white transition-colors group whitespace-nowrap"
+          >
+            BOOK A SHOOT
+            <svg
+              className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          {/* Desktop-only tagline */}
+          <p className="hidden md:block text-white/50 text-xs ml-auto leading-relaxed">
+            Sport & Automotive Fotografie · London — Weltweit
           </p>
-
-          <div className="flex items-center gap-4">
-            <a
-              href="#portfolio"
-              className="bg-white text-[#0A0A0A] text-xs font-semibold tracking-[0.15em] px-6 py-3 rounded-full hover:bg-[#FF2200] hover:text-white transition-colors duration-300"
-            >
-              MEINE ARBEIT
-            </a>
-            <a
-              href="#contact"
-              className="text-white/70 text-xs font-medium tracking-[0.15em] flex items-center gap-2 hover:text-white transition-colors group"
-            >
-              BOOK A SHOOT
-              <svg
-                className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
         </motion.div>
       </div>
 
-      {/* Vertical scroll label */}
+      {/* Vertical scroll label — desktop only */}
       <motion.div
         className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 hidden md:flex flex-col items-center gap-4"
         initial={{ opacity: 0 }}

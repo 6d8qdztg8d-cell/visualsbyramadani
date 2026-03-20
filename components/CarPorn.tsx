@@ -55,14 +55,14 @@ export default function CarPorn() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative bg-[#0A0A0A]" style={{ height: '100vh' }}>
+    <section ref={sectionRef} className="relative bg-[#0A0A0A] h-[55vw] md:h-screen">
       {/* Gradient oben */}
       <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#111110] to-transparent z-10 pointer-events-none" />
 
       {/* Video */}
       <video
         ref={videoRef}
-        src="/carporn.mov"
+        src="/carporn.mp4"
         className="absolute inset-0 w-full h-full object-cover"
         muted
         playsInline

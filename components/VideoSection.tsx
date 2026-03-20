@@ -55,16 +55,17 @@ export default function VideoSection() {
           </h2>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Cards — 2 oben, 1 mittig unten */}
+        <div className="grid grid-cols-2 gap-4">
           {REELS.map((reel, i) => (
             <motion.a
               key={reel.title}
               href={reel.watchUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative rounded-xl overflow-hidden block bg-[#1A1A19] cursor-pointer"
-              style={{ aspectRatio: '3/4' }}
+              className={`group relative rounded-xl overflow-hidden block bg-[#1A1A19] cursor-pointer aspect-[3/4] ${
+                i === 2 ? 'col-span-2 mx-auto w-1/2' : ''
+              }`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
