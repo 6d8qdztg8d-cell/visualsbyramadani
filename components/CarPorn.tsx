@@ -40,7 +40,7 @@ export default function CarPorn() {
       if (!video.duration || !isFinite(video.duration)) return
 
       // Geschwindigkeit: Video fertig wenn Section durchgescrollt (~500px sichtbarer Scroll)
-      const speed = video.duration / 1100
+      const speed = video.duration / 900
       video.currentTime = Math.min(
         Math.max(video.currentTime + delta * speed, 0),
         video.duration
