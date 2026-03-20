@@ -13,27 +13,47 @@ export default function CarPorn() {
     const section = sectionRef.current
     if (!video || !section) return
 
-    // Lade Video vor ohne Autoplay
     video.preload = 'auto'
     video.pause()
     video.currentTime = 0
 
+    let targetTime = 0
+    let currentTime = 0
+    let animating = false
+
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t
+
+    const animate = () => {
+      if (!video.duration || !isFinite(video.duration)) {
+        rafRef.current = requestAnimationFrame(animate)
+        return
+      }
+
+      currentTime = lerp(currentTime, targetTime, 0.12)
+
+      if (Math.abs(currentTime - targetTime) > 0.001) {
+        video.currentTime = currentTime
+        rafRef.current = requestAnimationFrame(animate)
+      } else {
+        video.currentTime = targetTime
+        currentTime = targetTime
+        animating = false
+      }
+    }
+
     const onScroll = () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-      rafRef.current = requestAnimationFrame(() => {
-        const rect = section.getBoundingClientRect()
-        const sectionHeight = section.offsetHeight
-        const windowHeight = window.innerHeight
+      const rect = section.getBoundingClientRect()
+      const scrollable = section.offsetHeight - window.innerHeight
+      const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1)
 
-        // Scroll-Fortschritt: 0 wenn Abschnitt oben eintritt, 1 wenn er unten verlässt
-        const scrolled = -rect.top
-        const scrollable = sectionHeight - windowHeight
-        const progress = Math.min(Math.max(scrolled / scrollable, 0), 1)
+      if (video.duration && isFinite(video.duration)) {
+        targetTime = progress * video.duration
+      }
 
-        if (video.duration && isFinite(video.duration)) {
-          video.currentTime = progress * video.duration
-        }
-      })
+      if (!animating) {
+        animating = true
+        rafRef.current = requestAnimationFrame(animate)
+      }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -44,7 +64,7 @@ export default function CarPorn() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative" style={{ height: '400vh' }}>
+    <section ref={sectionRef} className="relative" style={{ height: '180vh' }}>
       {/* Sticky Container — bleibt im Viewport während gescrollt wird */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#0A0A0A]">
         {/* Video */}
