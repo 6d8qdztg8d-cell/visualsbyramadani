@@ -17,43 +17,25 @@ export default function CarPorn() {
     video.pause()
     video.currentTime = 0
 
-    let targetTime = 0
-    let currentTime = 0
-    let animating = false
-
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t
-
-    const animate = () => {
-      if (!video.duration || !isFinite(video.duration)) {
-        rafRef.current = requestAnimationFrame(animate)
-        return
-      }
-
-      currentTime = lerp(currentTime, targetTime, 0.12)
-
-      if (Math.abs(currentTime - targetTime) > 0.001) {
-        video.currentTime = currentTime
-        rafRef.current = requestAnimationFrame(animate)
-      } else {
-        video.currentTime = targetTime
-        currentTime = targetTime
-        animating = false
-      }
-    }
+    // Glockenkurve: f(x) = (1 - cos(π·x)) / 2
+    // Ableitung f'(x) = π/2 · sin(π·x) → Maximum bei x=0.5 (Sektion mittig im Viewport)
+    // Selbst kleinster Scroll (x→0+) hat sofort positiven Effekt da sin(π·0+) > 0
+    const easeInOut = (x: number) => (1 - Math.cos(Math.PI * x)) / 2
 
     const onScroll = () => {
-      const rect = section.getBoundingClientRect()
-      const scrollable = section.offsetHeight - window.innerHeight
-      const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      rafRef.current = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect()
+        const scrollable = section.offsetHeight - window.innerHeight
+        const rawProgress = Math.min(Math.max(-rect.top / scrollable, 0), 1)
 
-      if (video.duration && isFinite(video.duration)) {
-        targetTime = progress * video.duration
-      }
+        // Nicht-lineare Abbildung: langsam → schnell → langsam
+        const easedProgress = easeInOut(rawProgress)
 
-      if (!animating) {
-        animating = true
-        rafRef.current = requestAnimationFrame(animate)
-      }
+        if (video.duration && isFinite(video.duration)) {
+          video.currentTime = easedProgress * video.duration
+        }
+      })
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -64,7 +46,7 @@ export default function CarPorn() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative" style={{ height: '180vh' }}>
+    <section ref={sectionRef} className="relative" style={{ height: '280vh' }}>
       {/* Sticky Container — bleibt im Viewport während gescrollt wird */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#0A0A0A]">
         {/* Video */}
