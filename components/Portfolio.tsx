@@ -23,52 +23,31 @@ const PHOTOS = [
   },
   {
     id: 3,
-    category: 'boxing',
-    title: 'Siegesmoment',
-    location: 'Berlin, Deutschland',
-    src: '/portfolio/boxing-3.jpg',
-  },
-  {
-    id: 4,
     category: 'football',
     title: 'Spieltag',
     location: 'Wembley, London',
     src: '/portfolio/football-1.jpg',
   },
   {
-    id: 5,
+    id: 4,
     category: 'football',
     title: 'Stadionenergie',
     location: 'Amsterdam, NL',
     src: '/portfolio/football-2.jpg',
   },
   {
-    id: 6,
-    category: 'football',
-    title: 'Reiner Instinkt',
-    location: 'Madrid, Spanien',
-    src: '/portfolio/football-3.jpg',
-  },
-  {
-    id: 7,
+    id: 5,
     category: 'automotive',
     title: 'Rolling Thunder',
     location: 'Monaco',
     src: '/portfolio/auto-1.jpg',
   },
   {
-    id: 8,
+    id: 6,
     category: 'automotive',
     title: 'Volle Fahrt',
     location: 'Dubai, UAE',
     src: '/portfolio/auto-2.jpg',
-  },
-  {
-    id: 9,
-    category: 'automotive',
-    title: 'Präzision',
-    location: 'London, UK',
-    src: '/portfolio/auto-3.jpg',
   },
 ]
 
@@ -131,7 +110,7 @@ export default function Portfolio() {
         </div>
 
         {/* Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        <motion.div layout className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           <AnimatePresence mode="popLayout">
             {filtered.map((photo) => (
               <motion.div
