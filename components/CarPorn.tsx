@@ -39,8 +39,8 @@ export default function CarPorn() {
 
       if (!video.duration || !isFinite(video.duration)) return
 
-      // Geschwindigkeit: gesamte Video-Länge über ~600px Scroll
-      const speed = video.duration / 600
+      // Geschwindigkeit: gesamte Video-Länge über ~1800px Scroll
+      const speed = video.duration / 1800
       video.currentTime = Math.min(
         Math.max(video.currentTime + delta * speed, 0),
         video.duration
